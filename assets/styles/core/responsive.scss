@@ -1,0 +1,54 @@
+//###############################################
+// Global Responsive Stuff
+//###############################################
+$gutter: 20px;
+$width-desktop: 62.5em;
+
+//###############################################
+// Responsive
+//###############################################
+.responsive {
+    width: $width-desktop;
+    margin: auto;
+
+    & > aside, & > article, & > div{
+        padding: $gutter;
+    }
+}
+
+@media all and (max-width: $width-desktop){
+    .responsive{width: 100%;}
+}
+
+@media all and (max-width: 50em){
+    .responsive {
+        width: 100%;
+        & > aside, & > article, & > div{
+            width: 100% !important;
+            padding: $gutter;
+        }
+    }
+}
+
+//###############################################
+// Page
+//###############################################
+.ui-grid-a.page{
+    & > aside{width: 25%;}
+    & > article{
+        width: 75%;
+        padding: $gutter;
+    }
+}
+@media all and (max-width: $width-desktop){
+    .ui-grid-a.page{
+        & > aside{width: 30%;}
+        & > article{width: 70%;}
+    }
+}
+@media all and (max-width: 50em){
+    .ui-grid-a.page{
+        & > aside{width: 100%;}
+        & > article{width: 100%;}
+    }
+}

@@ -1,0 +1,19 @@
+/*!==============================================
+| Default Theme
+| :: KEEP JQM AND CUSTOM STYLES SEPARATE!!!
+|   Otherwise themeroller will overwrite custom css
+=================================================*/
+@import 'jqm/structure';
+@import 'jqm/default';
+@import 'core/responsive';
+@import 'core/helpers';
+@import 'fonts/fonts';
+
+ul.notices{
+    margin: $gutter 0;
+    display: none;
+}
+a.ui-link-inherit{
+    white-space: normal !important;
+    line-height: 1.25em;
+}

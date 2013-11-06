@@ -1,0 +1,5 @@
+Title: 3Betters
+----
+Author: Oz Ramos
+----
+Description: A rapid platform for the serious poker player
