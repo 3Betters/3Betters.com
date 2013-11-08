@@ -11,15 +11,15 @@
     <?= css('assets/styles/style.css') ?> 
 
     <!-- Dependencies -->
-    <?= js("assets/js/lib/jquery.js") ?>
-    <?= js("assets/js/lib/jquery.mobile.js") ?>
-    <?= js("assets/js/lib/underscore.js") ?>     
+    <?= js('assets/js/lib/jquery.js') ?>
+    <?= js('assets/js/lib/jquery.mobile.js') ?>
+    <?= js('assets/js/lib/underscore.js') ?>
 
     <!-- App -->
-    <?= js("assets/js/helpers.js") ?>
-    <?= js("assets/js/app.js") ?>
-    <?= js("assets/js/app/auth.js") ?>
-    <?= js("assets/js/app/user.js") ?>
+    <?= js('assets/js/helpers.js') ?>
+    <?= js('assets/js/app.js') ?>
+    <?= js('assets/js/app/authentication.js') ?>
+    <?= js('assets/js/app/database.js') ?>
 
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>
@@ -29,3 +29,6 @@
             <a href="/"><i class="icon-home"></i></a>
             <h1><?= $page->title() ?></h1>
         </header>
+
+        <!-- CORE MODULES -->
+        <script data-id="bankroll" data-module="<?= url('assets/js/mods/bankroll.js') ?>"></script>

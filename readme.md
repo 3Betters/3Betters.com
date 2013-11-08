@@ -13,9 +13,26 @@ If you're viewing this on GitHub, visit [mod.3betters.com](http://mod.3betters.c
 ## Documentation Notes
 * An asterisk next to any argument means it's required.
 
+## Debugging
+To toggle console debugging, simply add `app.debug(true)` or a `app.debug(false)` to your module script. Alternatively, you can add `debug=true` to the body element if you're developing locally.
+
+
+
+
+
+
+
+
+
+
+
+
+#API
 
 ## Authentication
 The following can be used to login and logout the user. 3Betters always tries to log the user in automatically on the initial page load.
+
+
 
 ### **login**	auth.login(popup, pass, fail)
 Attempts to log the user in if they aren't already. The standard Google login form will show in a popup if **pass** is true, otherwise it will attempt to log the user in automatically [default]. **pass** and **fail** are callback functions which are executed after the check has been made.

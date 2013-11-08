@@ -14,26 +14,53 @@
                                     be +EV
 */
 
-app = {};
-user = {};
+app = function(){
+    //- - - - - - - - - - - - - - - - - - - - - - - -
+    // List of loaded mods
+    //- - - - - - - - - - - - - - - - - - - - - - - -
+    var mods = {};
+    var debug = false;
+    $(function(){
+        debug = !!$('body').attr('debug');
+    });
+
+    return {
+        //===============================================
+        // Loads a module
+        // id:      [STR] The modules ID. Only get's loaded if it's unique
+        // src:     [STR] URL of the file
+        // callback:[FUNC] Callback function to execute after load
+        //===============================================
+        load: function(id, src){
+            if(!_.has(mods, id)){
+                //$.ajax
+            }
+        },
+
+        //===============================================
+        // Toggle debugging
+        //===============================================
+        debug: function(setDebug){
+            return debug = setDebug;
+        }
+    };
+}();
 
 //###############################################
 // The API interface
 //###############################################
-api = {
-    //===============================================
-    // Methods use to watch a $ event on each pageShow()
-    //===============================================
-    watch: {}
-};
+api = {};
 
 
 //###############################################
 // PageShow events
 //###############################################
 $(document).bind('pagebeforeshow', function(){
-    _.each(api.watch, function(func){
-        func();
+    //- - - - - - - - - - - - - - - - - - - - - - - -
+    // Load Modules
+    //- - - - - - - - - - - - - - - - - - - - - - - -
+    $('script[data-module]').each(function(){
+        var $this = $(this);
     });
 });
 
