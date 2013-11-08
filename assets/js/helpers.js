@@ -20,8 +20,13 @@ function switchTheme(list, theme, prefix){
     prefix = prefix || 'ui-btn-up-';
 
     _.each(list, function($obj){
-        $obj.removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-body-a ui-body-b ui-body-c')
-            .addClass(prefix + theme)
+        $obj.removeClass(
+            'ui-btn-up-a ui-btn-hover-a ui-body-a ' +
+            'ui-btn-up-b ui-btn-hover-b ui-body-b ' +
+            'ui-btn-up-c ui-btn-hover-c ui-body-c ' +
+            'ui-btn-up-d ui-btn-hover-d ui-body-d ' +
+            'ui-btn-up-e ui-btn-hover-e ui-body-e'
+        ).addClass(prefix + theme)
             .attr('data-theme', theme);
     });
 }
@@ -56,8 +61,10 @@ function loading(msg){
 //===============================================
 // Execute a function or method
 // func:    (STR) The function or method, by string
+// args:    (OBJ) Contains all the properties to pass
 //===============================================
 function run(func, args){
+    console.log(func);
     if(typeof window[func] === 'function')
         window[func](args);
     else {

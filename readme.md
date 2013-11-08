@@ -16,5 +16,7 @@ This document is designed to help you mod 3Betters, allowing you to create, exte
 
 # Table of Contents
 * [Getting Started](_docs/getting-started.md)
-* [i18n](_docs/i18n.md)
 * [Helpers](_docs/helpers.md)
+* [app.js](_docs/app.js.md)
+* API's
+	* [Click](_docs/apis/click.md)

@@ -10,17 +10,20 @@
 
     <?= css('assets/styles/style.css') ?> 
 
-    <!-- Core -->
+    <!-- Dependencies -->
     <?= js("assets/js/lib/jquery.js") ?>
-    <?= js("assets/js/lib/jquerymobile.js") ?>
+    <?= js("assets/js/lib/jquery.mobile.js") ?>
     <?= js("assets/js/lib/underscore.js") ?>     
 
     <!-- App -->
     <?= js("assets/js/helpers.js") ?>
-    <?= js("assets/js/app/app.js") ?>
+    <?= js("assets/js/app.js") ?>
     <?= js("assets/js/app/auth.js") ?>
 
-    <script type="text/javascript" src="<?= url('assets/js/lib/gapi-client.js') ?>?onload=handleClientLoad"></script>
+    <!-- APIs -->
+    <?= js("assets/js/apis/click.js") ?>
+
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>
 <body class="<?= slugify($page->title()) ?>">
     <div id="page" data-role="page">

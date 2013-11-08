@@ -49,11 +49,13 @@ Shows the loading modal with the passed message, or hides it if nothing is passe
     loading(msg);
 
 ## run
-Executes the function or method by string.
+Executes the function or method by string. Passes an object of arguments
 
     // func:    (STR) The function or method, by string
+    // args:    (OBJ) Contains all the properties to pass
     run(func, args);
 
 ### Examples
-    run('myFunc');      //Runs myFunc()
-    run('my.method')    //Runs my.method()
+    run('myFunc');                  //Runs myFunc()
+    run('my.method');               //Runs my.method()
+    run('myFunc', {name: 'Oz'});    //Runs myFunc({name: 'Oz'});
