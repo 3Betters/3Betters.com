@@ -10,29 +10,6 @@
 //===============================================
 api.watch.click = function(){
     $('[click]').unbind('click').click(function(e){
-        var $this = $(this);
-        run($this.attr('click'), {
-            $this:  $this,
-            e:      e
-        });
+        eval($(this).attr('click'));
     });
-};
-
-//===============================================
-// Core methods
-//===============================================
-api['click'] = {
-    //===============================================
-    // Login
-    //===============================================
-    login: function(){
-        user.isIn(true);
-    },
-
-    //===============================================
-    // Logout
-    //===============================================
-    logout: function(){
-        window.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + window.location.href;
-    }
 };

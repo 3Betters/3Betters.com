@@ -23,7 +23,7 @@ snippet('header') ?>
             </div>
             <br>
             <p class="align-center">
-                <a class="login" click="api.click.login" href="#" data-text-login="Login with Google" data-text-logout="Logout" data-role="button" data-theme="e">Checking Login...</a>
+                <a class="login" onclick="auth.login(true)" href="#" data-text-login="Login with Google" data-text-logout="Logout" data-role="button" data-theme="e">Checking Login...</a>
                 <small>disable popups for this page if the login does not work</small>
             </p>
             <br>

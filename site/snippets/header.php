@@ -21,9 +21,6 @@
     <?= js("assets/js/app/auth.js") ?>
     <?= js("assets/js/app/user.js") ?>
 
-    <!-- APIs -->
-    <?= js("assets/js/apis/click.js") ?>
-
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>
 <body class="<?= slugify($page->title()) ?>">

@@ -43,4 +43,4 @@ $(document).bind('pagebeforeshow', function(){
 //===============================================
 // Automaticly called after gapi-client.js is loaded
 //===============================================
-function gapiLoaded(){user.isIn();}
+function gapiLoaded(){auth.login();}
