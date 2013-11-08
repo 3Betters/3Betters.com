@@ -18,6 +18,7 @@ snippet('header') ?>
         <article class="ui-block-a">
             <div class="align-center">
                 <h1><?= img('logo.png', '3Betters') ?></h1>
+                <p><em>be +EV</em></p>
                 <p>A rapid platform for the serious Poker player.</p>
             </div>
             <br>

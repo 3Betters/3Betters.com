@@ -1,22 +1,17 @@
-	                    __________________        __    __                       
-	                    \_____  \______   \ _____/  |__/  |_  ___________  ______
-	                      _(__  <|    |  _// __ \   __\   __\/ __ \_  __ \/  ___/
-	                     /       \    |   \  ___/|  |  |  | \  ___/|  | \/\___ \ 
-	                    /______  /______  /\___  >__|  |__|  \___  >__|  /____  >
-	                           \/       \/     \/                \/           \/
+![Logo](assets/img/logo.png)
 
-		                                        3Betters
-		                                   Built by: Oz Ramos
-		                      a rapid platform for the serious poker player
+**3Betters**  
+**Modding Guide**  
+_be +EV_
 
-		                                  	 Modding Guide
-		                                        be +EV
+If you're viewing this on GitHub, visit [mod.3betters.com](http://mod.3betters.com) for the best experience.
 
-This document is designed to help you mod 3Betters, allowing you to create, extend, and overwrite existing Poker tools that works with the 3Betters platform.
 
-# Table of Contents
-* [Getting Started](_docs/getting-started.md)
-* [Helpers](_docs/helpers.md)
-* [app.js](_docs/app.js.md)
-* API's
-	* [Click](_docs/apis/click.md)
+# Introduction
+3Betters is a powerful, cloud based platform for all areas of Poker (learning, teaching, researching). From the very beginning it was designed to be easily moddable by anyone, regardless of programming experience, by exposing the API you'll find in this document.
+
+
+
+# Users
+The `user` object contains all of the users data and exposes a few quick methods for manipulating it.
+

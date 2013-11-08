@@ -4885,3 +4885,7 @@ ul.notices {
 a.ui-link-inherit {
   white-space: normal !important;
   line-height: 1.25em; }
+
+em {
+  font-weight: bold;
+  font-style: italic; }

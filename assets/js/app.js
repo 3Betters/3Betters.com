@@ -8,14 +8,14 @@
 
                                     3Betters
                                Built by: Oz Ramos
-                  a rapid platform for the serious poker player
+                     a platform for the serious poker player
 
                             Main Application Script
                                     be +EV
 */
 
-app = {
-};
+app = {};
+user = {};
 
 //###############################################
 // The API interface
@@ -43,7 +43,4 @@ $(document).bind('pagebeforeshow', function(){
 //===============================================
 // Automaticly called after gapi-client.js is loaded
 //===============================================
-function gapiLoaded(){
-    auth.popup = false;
-    window.setTimeout(auth.check, 1);
-}
+function gapiLoaded(){user.isIn();}

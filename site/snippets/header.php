@@ -19,6 +19,7 @@
     <?= js("assets/js/helpers.js") ?>
     <?= js("assets/js/app.js") ?>
     <?= js("assets/js/app/auth.js") ?>
+    <?= js("assets/js/app/user.js") ?>
 
     <!-- APIs -->
     <?= js("assets/js/apis/click.js") ?>
