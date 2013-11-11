@@ -103,7 +103,7 @@ Google Spreadsheets are used as the database for a multitude of reasons includin
 ### load 		`db.load(callback)`
 Attempts to load the default database into `db.meta`. **callback** is called after the attempt is made and is passed a single argument, `response`, which contains the server response object.
 
-If no callback is passed, then `response` is parsed (with the data going into `db.meta`), otherwise you are responsible for populating it yourself.
+If no callback is passed, then `response` is parsed (with the data going into `db.meta`) and `db.sheets.load()` is called, otherwise you are responsible for doing this yourself.
 
 _Note that only the first found database will be used!_
 

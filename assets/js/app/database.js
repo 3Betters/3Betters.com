@@ -19,6 +19,7 @@ db = function(){
                 }
                 else {
                     db.meta(result.items[0]);
+                    db.sheets.load();
                     app.log('Loaded databases', result);
                 }
             }
@@ -64,6 +65,7 @@ db = function(){
                 callback: function(result){
                     loading();
                     db.meta(result);
+                    db.sheets.load();
                     app.log('Created database', result);
 
                     if(_.isFunction(callback)) callback(result);
@@ -94,15 +96,37 @@ db = function(){
             //===============================================
             // Loads all the sheets from the current database
             // :: This will overwrite any existing data
+            // :: Converts the feed into a json object
             //===============================================
             load: function(callback){
-                var url = 'https://spreadsheets.google.com/feeds/worksheetss/'+db.meta().id+'/private/full?access_token=' + auth.token();
+                var url = 'https://spreadsheets.google.com/feeds/worksheets/'+db.meta().id+'/private/full?access_token=' + auth.token();
                 loading('Loading Sheets.');
                 $.get(url, function(data){
                     loading();
-                    console.log(data);
+                    app.log('Loaded sheets.', data);
+                    var $feed = $('feed', data);
+
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Parse the meta
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    sheetMeta = {
+                        orig:       data,
+                        id:         $feed.children('id').text(),
+                        updated:    $feed.children('updated').text(),
+                        sheet:     []
+                    };
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Parse sheets
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    $feed.children('entry').each(function(){
+                        var $this = $(this);
+                        sheetMeta.sheet.push({
+                            url:    $this.children('id').text(),
+                            title:  $this.children('title').text()
+                        });
+                    });
                 }).fail(function(){
-                    notice.add('Could not load sheets.');
+                    notice.add('Could not load sheets, try refreshing the page if you just deleted your database or went offline.', 'no sheets');
                     loading();
                 });
             }
