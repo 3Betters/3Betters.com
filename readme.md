@@ -5,7 +5,7 @@
 _be +EV_
 
 # Introduction
-3Betters is a powerful, cloud based platform for all areas of Poker (learning, teaching, researching). From the very beginning it was designed to be easily moddable by anyone, regardless of programming experience, by exposing the API you'll find in this document.
+3Betters is a powerful, cloud based platform for all areas of Poker (learning, teaching, researching). From the very beginning it was designed to be easily modded by anyone, regardless of programming experience, by exposing the API you'll find in this document.
 
 The site is built on [KirbyCMS](http://getkirby.com), uses [jQuery Mobile](http://jquerymobile.com) and a customized version of the jQM [Graphite](http://driftyco.github.io/graphite/) theme. However, to get started all you need to do is download the [latest site build](https://github.com/3Betters/3Betters.com/archive/master.zip) (which is an exact clone of what's on the live site) and jump in with these docs.
 
@@ -80,6 +80,30 @@ if(auth.in())
 else
 	console.log('User is logged out');
 ```
+
+
+## Database
+The plan is to have your mod the same across multiple database using the following common API. For now, a single Google Spreadsheet is used as the database.
+
+### load 		`db.load(callback)`
+Attempts to load the default database into `db.data`. **callback** is called after the attempt is made and is passed a single argument, `response`, which contains the server response object.
+
+If no callback is passed, then `response` is parsed (with the data going into `db.data`), otherwise you are responsible for populating it yourself.
+
+_Note that only the first found database will be used!_
+
+### create 		`db.create(callback)`
+Will create a new database file, calling **callback** with the servers `result` as it's only argument.
+
+If no callback is passed, then `result` is stored into `db.data`, otherwise you'll be responsible for populating it yourself.
+
+This method is called automatically by 3Betters if no databases are found after logging in. This method is exposed for future releases and probably shouldn't be used in your mods unless you know what you're doing. **Seriously!**
+
+
+
+
+
+
 
 
 
