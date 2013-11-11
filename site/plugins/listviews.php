@@ -31,10 +31,24 @@ function listview_pages($pageSlug, $inset = true, $themeHeader = 'a', $themeBody
             <li data-role="list-divider" data-theme="<?= $themeHeader ?>"><?= $headerIcon . ucwords(str_replace('-', ' ', $path[count($path)-1])) ?></li>
             <?php 
                 foreach($children as $child): 
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Links
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    if($child->link()){
+                        $url = $child->link();
+                        $noAjax = ' data-ajax="false" ';
+                    } else {
+                        $url = $child->url();
+                        $noAjax = '';
+                    }
+
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Icons
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
                     $icon = '';
                     if($child->icon()) $icon = '<i class="icon-' . $child->icon() . '"></i> ';
             ?>
-                <li data-theme="<?= $themeBody ?>"><a href="<?= $child->url() ?>"><?= $icon . $child->title() ?></a></li>
+                <li data-theme="<?= $themeBody ?>"><a href="<?= $url ?>" <?= $noAjax ?>><?= $icon . $child->title() ?></a></li>
             <?php endforeach; ?>
         </ul>
     <?php endif;

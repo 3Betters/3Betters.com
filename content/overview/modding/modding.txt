@@ -1,0 +1,5 @@
+Title: Modding
+----
+Sidebar: overview
+----
+Link: /mod.html

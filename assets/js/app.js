@@ -21,7 +21,7 @@ app = function(){
     var mods = {};
     var debug = false;
     $(function(){
-        debug = !!$('body').attr('debug');
+        debug = $('body').hasClass('debug');
     });
 
     return {
@@ -41,7 +41,17 @@ app = function(){
         // Toggle debugging
         //===============================================
         debug: function(setDebug){
+            if(typeof setDebug == 'undefined') setDebug = debug;
             return debug = setDebug;
+        },
+
+        //===============================================
+        // Console logging
+        // msg:     [STR] The message to log
+        // data:    [***] Any additional data to display
+        //===============================================
+        log: function(msg, data){
+            if(app.debug()) console.log('3Betters: ' + msg, data);
         }
     };
 }();

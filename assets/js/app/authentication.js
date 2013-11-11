@@ -17,10 +17,12 @@ auth = function(){
         if(result && !result.error){
             loggedIn();
             if(callbacks.pass) callbacks.pass(result);
+            app.log('Logged in', result);
         }
         else {
             loggedOut();
             if(callbacks.pass) callbacks.pass(result);
+            app.log('Could not log in.', result);
         }
     }
 
@@ -34,6 +36,11 @@ auth = function(){
         $login.attr('onclick', 'window.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + window.location.href;');
 
         isIn = true;
+
+        //- - - - - - - - - - - - - - - - - - - - - - - -
+        // Load Database
+        //- - - - - - - - - - - - - - - - - - - - - - - -
+        
     }
 
     //===============================================

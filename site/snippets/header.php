@@ -23,7 +23,7 @@
 
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>
-<body class="<?= slugify($page->title()) ?>">
+<body class="debug <?= slugify($page->title()) ?>">
     <div id="page" data-role="page">
         <header data-role="header">
             <a href="/"><i class="icon-home"></i></a>

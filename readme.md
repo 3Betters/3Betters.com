@@ -4,17 +4,24 @@
 **Modding Guide**  
 _be +EV_
 
-If you're viewing this on GitHub, visit [mod.3betters.com](http://mod.3betters.com) for the best experience.
-
-
 # Introduction
 3Betters is a powerful, cloud based platform for all areas of Poker (learning, teaching, researching). From the very beginning it was designed to be easily moddable by anyone, regardless of programming experience, by exposing the API you'll find in this document.
+
+The site is built on [KirbyCMS](http://getkirby.com), uses [jQuery Mobile](http://jquerymobile.com) and a customized version of the jQM [Graphite](http://driftyco.github.io/graphite/) theme. However, to get started all you need to do is download the [latest site build](https://github.com/3Betters/3Betters.com/archive/master.zip) (which is an exact clone of what's on the live site) and jump in with these docs.
 
 ## Documentation Notes
 * An asterisk next to any argument means it's required.
 
 ## Debugging
-To toggle console debugging, simply add `app.debug(true)` or a `app.debug(false)` to your module script. Alternatively, you can add `debug=true` to the body element if you're developing locally.
+Debugging is critical to creating an awesome mod that just works!
+
+### app.debug 	`app.debug(toggle)`
+Pass `true` or `false` to toggle debug mode. Turned off by default, you can force it on by giving the `<body>` a class of `debug`.
+
+If you just want to know whether debug is enabled or not, simply don't pass anything as the method always returns the state.
+
+### app.log 	`app.log(msg, data)`
+This method let's you safely log messages to the console. Messages are only logged if `app.debug()` is true, meaning you can (and should) leave your debug messages in the tool even after publishing.
 
 
 
@@ -24,17 +31,14 @@ To toggle console debugging, simply add `app.debug(true)` or a `app.debug(false)
 
 
 
-
-
-
-#API
+# API
 
 ## Authentication
-The following can be used to login and logout the user. 3Betters always tries to log the user in automatically on the initial page load.
+The following can be used to log the user in and out. 3Betters always tries to log the user in automatically on the initial page load.
 
 
 
-### **login**	auth.login(popup, pass, fail)
+### login	`auth.login(popup, pass, fail)`
 Attempts to log the user in if they aren't already. The standard Google login form will show in a popup if **pass** is true, otherwise it will attempt to log the user in automatically [default]. **pass** and **fail** are callback functions which are executed after the check has been made.
 
 This method returns null, so use the callbacks. Each callback receives a single argument containing the authentication servers message.
@@ -67,9 +71,7 @@ function oops(result){
 auth.login(false, hello, oops);
 ```
 
-
-
-### **in**	auth.in()
+### in		`auth.in()`
 Determines if the user is logged in or not.
 
 ```js
@@ -78,3 +80,43 @@ if(auth.in())
 else
 	console.log('User is logged out');
 ```
+
+
+
+
+# Hardmods
+Hardmods require changing the actual source code, but gives you unlimited flexibility. However, hardmods are more difficult to publish because either you need to host the entire project with your hardmods yourself or you need to pass our [strict] screening process to have it added into future, official versions.
+
+_This section may be sparse as our initial intent is to target modders who want to create installable mods._
+
+## Pages
+KirbyCMS uses [YAML](http://getkirby.com/blog/structured-field-content) to define page variables. And while you can create your own, the following official variables have unique properties to help you get started.
+
+### Sidebar `(STR)`
+Will search for all the children pages of `sidebar` (relative to `/content`), and creates a listview from them. The sidebars title is taken from the parents folder name, with hyphens removed and words capitalized.
+
+	# YAML
+	sidebar: tools/my-tool
+
+	- - - - -
+
+	// Directory
+	tools
+		- my-tool
+			- overview
+			- create
+			- delete
+			- help
+
+	- - - - - 
+
+	Outputs a listview with a title of "My Tool", and an item to each child page.
+
+#### Order `(INT)`
+Sets the page order to show the sidebar items in, in ascending order.
+
+#### Icon `(STR)`
+The icon class (without the `.icon-`) to prepend the title with.
+
+#### Link `(STR)`
+If present, clicking on the item will take you to this link instead of it's normal page URL.

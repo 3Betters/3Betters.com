@@ -11,7 +11,7 @@
 	<!-- Flatdoc -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src='http://rstacruz.github.io/flatdoc/v/0.8.0/legacy.js'></script>
-	<script src='http://rstacruz.github.io/flatdoc/v/0.8.0/flatdoc.js'></script>
+	<script src='assets/js/lib/flatdoc.js'></script>
 
 	<!-- Flatdoc theme -->
 	<link  href='http://rstacruz.github.io/flatdoc/v/0.8.0/theme-white/style.css' rel='stylesheet'>
@@ -31,15 +31,15 @@
 	<!-- Custom Styles -->
 	<link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
 	<style>
-		body.big-h3 h3{
+		body.big-h3 h3, body.big-h3 h4{
 			font-family: Lato;
-			font-weight: 300;
-		}
-		body.big-h3 h3 strong{
 			font-weight: 900;
+		}
+		body.big-h3 h3 code, body.big-h3 h4 code{
+			font-weight: 300;
 			display: inline-block;
-			margin-right: 20px;
-			min-width: 100px;
+			margin-left: 60px;
+			background: none;
 		}
 	</style>
 </head>
