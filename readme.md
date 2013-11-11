@@ -23,11 +23,17 @@ If you just want to know whether debug is enabled or not, simply don't pass anyt
 ### app.log 	`app.log(msg, data)`
 This method let's you safely log messages to the console. Messages are only logged if `app.debug()` is true, meaning you can (and should) leave your debug messages in the tool even after publishing.
 
+### notice.add() `notice.add(msg, code, type, callback, icon)`
+Creates a new notice, which are shown to the user. **msg** is the HTML to use inside the notice and **code** is used to reference this notice when removing (you can use any combination of characters, spaces, etc). 
 
+**type** refers to the error type, and defaults to "error" (the other option is "success").
 
+**callback** gets added into the `onClick` attribute as-is, and you can use jQuery if you need to. By default, they are given a callback of `removeNotice($(this));` to remove the notice on click.
 
+> ![](_bin/docs/notices.jpg)
 
-
+### notice.remove() `notice.remove(code)`
+Removes the notice with the given `code`, which can be either a string or an array of strings.
 
 
 
@@ -81,25 +87,35 @@ else
 	console.log('User is logged out');
 ```
 
+### token	`auth.token()`
+Gets the authentication token, used when using the Spreadsheet REST API.
+
+
 
 ## Database
-The plan is to have your mod the same across multiple database using the following common API. For now, a single Google Spreadsheet is used as the database.
+Google Spreadsheets are used as the database for a multitude of reasons including:
+
+* Ubiquitousness
+* Manually editing is easy
+* Automatic Revisions/Backups by Google
+* Realtime collaboration
 
 ### load 		`db.load(callback)`
-Attempts to load the default database into `db.data`. **callback** is called after the attempt is made and is passed a single argument, `response`, which contains the server response object.
+Attempts to load the default database into `db.meta`. **callback** is called after the attempt is made and is passed a single argument, `response`, which contains the server response object.
 
-If no callback is passed, then `response` is parsed (with the data going into `db.data`), otherwise you are responsible for populating it yourself.
+If no callback is passed, then `response` is parsed (with the data going into `db.meta`), otherwise you are responsible for populating it yourself.
 
 _Note that only the first found database will be used!_
 
 ### create 		`db.create(callback)`
 Will create a new database file, calling **callback** with the servers `result` as it's only argument.
 
-If no callback is passed, then `result` is stored into `db.data`, otherwise you'll be responsible for populating it yourself.
+If no callback is passed, then `result` is stored into `db.meta`, otherwise you'll be responsible for populating it yourself.
 
 This method is called automatically by 3Betters if no databases are found after logging in. This method is exposed for future releases and probably shouldn't be used in your mods unless you know what you're doing. **Seriously!**
 
-
+### sheets.create 	`sheets.create(*title)`
+Creates a new worksheet with the given `title` if it doesn't exist.
 
 
 

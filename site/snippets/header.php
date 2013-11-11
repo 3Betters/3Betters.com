@@ -21,6 +21,8 @@
     <?= js('assets/js/app/authentication.js') ?>
     <?= js('assets/js/app/database.js') ?>
 
+    <?= js('assets/js/modules/notice.js') ?>
+
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>
 <body class="debug <?= slugify($page->title()) ?>">

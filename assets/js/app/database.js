@@ -1,5 +1,6 @@
 //###############################################
 // The database interface
+// :: Also contains meta data for modules
 //###############################################
 db = function(){
     //===============================================
@@ -23,7 +24,8 @@ db = function(){
             }
         }
     };
-    var meta = {};    //Contains the database meta data, which is what gets returned from db.load
+    var meta = {};      //Contains the database meta data, which is what gets returned from db.load
+    var sheetMeta = {}; //Contains global sheets metadata
 
     return {
         //===============================================
@@ -57,7 +59,7 @@ db = function(){
                 method:     'POST',
                 body:       {
                     'title':    '[3Betters] Database',
-                    'mimeType': 'applications/vnd.google-apps.spreadsheet'
+                    'mimeType': 'application/vnd.google-apps.spreadsheet'
                 },
                 callback: function(result){
                     loading();
@@ -75,6 +77,35 @@ db = function(){
         meta: function(db){
             if(!db) return meta;
             else meta = db;
+        },
+
+        //###############################################
+        // Individual sheets
+        //###############################################
+        sheets: {
+            //===============================================
+            // Create a new worksheet if it doesn't exist
+            //===============================================
+            create: function(title){
+                if(!_.isString(title))
+                    return app.log('You must pass a [STR] title into sheets.create()');
+            },
+
+            //===============================================
+            // Loads all the sheets from the current database
+            // :: This will overwrite any existing data
+            //===============================================
+            load: function(callback){
+                var url = 'https://spreadsheets.google.com/feeds/worksheetss/'+db.meta().id+'/private/full?access_token=' + auth.token();
+                loading('Loading Sheets.');
+                $.get(url, function(data){
+                    loading();
+                    console.log(data);
+                }).fail(function(){
+                    notice.add('Could not load sheets.');
+                    loading();
+                });
+            }
         }
     };
 }();

@@ -3,12 +3,13 @@
 //###############################################
 auth = function(){
     var clientID = '324420386814-7ti7k7b1kd23jf7a53jq6tpnu5n2k9ml.apps.googleusercontent.com';
-    var scopes = 'https://www.googleapis.com/auth/drive.file';
+    var scopes = ['https://www.googleapis.com/auth/drive.file', 'https://spreadsheets.google.com/feeds/'];
     var callbacks = {
         pass: null,
         fail: null
     };
     var isIn = false;   //Is the user logged in?
+    var authToken = null;   //The access token
 
     //===============================================
     // Gets the server response for authorization
@@ -40,6 +41,7 @@ auth = function(){
         //- - - - - - - - - - - - - - - - - - - - - - - -
         // Load Database
         //- - - - - - - - - - - - - - - - - - - - - - - -
+        authToken = gapi.auth.getToken().access_token;
         db.load();
     }
 
@@ -53,6 +55,7 @@ auth = function(){
         $login.attr('onclick', 'auth.login(true)');
 
         isIn = false;
+        authToken = null;
     }
 
     //###############################################
@@ -92,6 +95,13 @@ auth = function(){
             if(isIn && pass) pass();
             if(!isIn && fail) fail();
             return isIn;
+        },
+
+        //===============================================
+        // Gets the authentication token
+        //===============================================
+        token: function(){
+            return authToken;
         }
     };
 }();

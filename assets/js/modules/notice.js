@@ -17,15 +17,14 @@ notice = {
         type = type || 'error';
         var $notices = $('ul.notices.' + type);
         if(msg.indexOf('<a ') === -1) msg = '<a>'+msg+'</a>';
-        callback = callback || 'removeNotice';
+        callback = callback || 'removeNotice($(this))';
         icon = icon || 'delete';
 
         //- - - - - - - - - - - - - - - - - - - - - - - -
         // Creae the row
         //- - - - - - - - - - - - - - - - - - - - - - - -
         if($('li[data-notice="' + code + '"]', $notices).length) return;
-        $notices.append('<li click="'+callback+'" data-notice="'+code+'" data-theme="c" data-icon="'+icon+'">'+msg+'</li>').listview('refresh');
-        api.click.init();
+        $notices.append('<li onClick="'+callback+'" data-notice="'+code+'" data-theme="c" data-icon="'+icon+'">'+msg+'</li>').listview('refresh');
         $notices.show();
     },
 
@@ -46,3 +45,15 @@ notice = {
         });
     }
 };
+
+//===============================================
+// Default callback for removing a notice
+//===============================================
+function removeNotice($this){
+    $this.closest('li').remove();
+    var $notices = $('ul.notices');
+    $notices.each(function(){
+        var $this = $(this);
+        if($('li', $this).length < 2) $this.hide();
+    });
+}
