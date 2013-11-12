@@ -114,12 +114,17 @@ If no callback is passed, then `result` is stored into `db.meta`, otherwise you'
 
 This method is called automatically by 3Betters if no databases are found after logging in. This method is exposed for future releases and probably shouldn't be used in your mods unless you know what you're doing. **Seriously!**
 
+### url		`url()`
+Gets the databases URL, complete with the authentication token.
+
 ### sheets.create 	`sheets.create(*title)`
 Creates a new worksheet with the given `title` if it doesn't exist.
 
+### sheets.load 	`sheets.load(callback)`
+Finds all the sheets in the database and imports their metadata. **callback** is called after the metadata is parsed.
 
-
-
+### sheets.check 	`sheets.check()`
+Verifies that the required exist. If they don't they'll be created and have defaults set.
 
 
 

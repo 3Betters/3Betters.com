@@ -19,7 +19,7 @@ db = function(){
                 }
                 else {
                     db.meta(result.items[0]);
-                    db.sheets.load();
+                    db.sheets.load(db.sheets.check);
                     app.log('Loaded databases', result);
                 }
             }
@@ -27,6 +27,7 @@ db = function(){
     };
     var meta = {};      //Contains the database meta data, which is what gets returned from db.load
     var sheetMeta = {}; //Contains global sheets metadata
+    var feedURL = '';
 
     return {
         //===============================================
@@ -51,6 +52,13 @@ db = function(){
         },
 
         //===============================================
+        // Gets the databases URL
+        //===============================================
+        url: function(){
+            return feedURL + auth.token();
+        },
+
+        //===============================================
         // Creates a new database
         //===============================================
         create: function(callback){
@@ -65,7 +73,7 @@ db = function(){
                 callback: function(result){
                     loading();
                     db.meta(result);
-                    db.sheets.load();
+                    db.sheets.load(db.sheets.check);
                     app.log('Created database', result);
 
                     if(_.isFunction(callback)) callback(result);
@@ -81,6 +89,9 @@ db = function(){
             else meta = db;
         },
 
+
+
+
         //###############################################
         // Individual sheets
         //###############################################
@@ -94,40 +105,76 @@ db = function(){
             },
 
             //===============================================
-            // Loads all the sheets from the current database
+            // Loads all the sheet meta from the current database
             // :: This will overwrite any existing data
             // :: Converts the feed into a json object
             //===============================================
             load: function(callback){
-                var url = 'https://spreadsheets.google.com/feeds/worksheets/'+db.meta().id+'/private/full?access_token=' + auth.token();
-                loading('Loading Sheets.');
-                $.get(url, function(data){
-                    loading();
-                    app.log('Loaded sheets.', data);
-                    var $feed = $('feed', data);
+                feedURL = 'https://spreadsheets.google.com/feeds/worksheets/' + db.meta().id + '/private/full?access_token=';
+                loading('Loading Sheets');
+                $.get(db.url())
+                    .fail(function(){
+                        notice.add('Could not load sheets, try refreshing the page if you just deleted your database or went offline.', 'no sheets');
+                        loading();
+                    }).done(function(data){
+                        loading();
+                        var $feed = $('feed', data);
 
-                    //- - - - - - - - - - - - - - - - - - - - - - - -
-                    // Parse the meta
-                    //- - - - - - - - - - - - - - - - - - - - - - - -
-                    sheetMeta = {
-                        orig:       data,
-                        id:         $feed.children('id').text(),
-                        updated:    $feed.children('updated').text(),
-                        sheet:     []
-                    };
-                    //- - - - - - - - - - - - - - - - - - - - - - - -
-                    // Parse sheets
-                    //- - - - - - - - - - - - - - - - - - - - - - - -
-                    $feed.children('entry').each(function(){
-                        var $this = $(this);
-                        sheetMeta.sheet.push({
-                            url:    $this.children('id').text(),
-                            title:  $this.children('title').text()
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        // Parse the meta
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        sheetMeta = {
+                            id:         $feed.children('id').text(),
+                            updated:    $feed.children('updated').text(),
+                            sheet:     []
+                        };
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        // Parse sheets
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        $feed.children('entry').each(function(){
+                            var $this = $(this);
+                            sheetMeta.sheet.push({
+                                url:    $this.children('id').text(),
+                                title:  $this.children('title').text()
+                            });
                         });
+
+                        app.log('Loaded sheets', sheetMeta);
+                        if(_.isFunction(callback)) callback();
                     });
-                }).fail(function(){
-                    notice.add('Could not load sheets, try refreshing the page if you just deleted your database or went offline.', 'no sheets');
-                    loading();
+            },
+
+            //===============================================
+            // Checks that the required sheets are there
+            // :: Builds them if they aren't
+            //      :: Fill in defaults
+            // :: Validate that required data is set
+            //      :: Fill in defaults if they aren't
+            //===============================================
+            check: function(){
+                var required = ['Mods'];
+                var existing = _.pluck(sheetMeta.sheet, 'title');
+                var missing = _.difference(required, existing);
+
+                //- - - - - - - - - - - - - - - - - - - - - - - -
+                // Create the sheet
+                //- - - - - - - - - - - - - - - - - - - - - - - -
+                _.each(missing, function(e, i){
+                    loading('Creating required sheets');
+                    $.post('/server/post.php', {
+                            url:    db.url(),
+                            action:   'new-workbook',
+                            data: {
+                                title: e
+                            }
+                        }
+                    ).error(function(result){
+                        loading();
+                        app.log(result);
+                    }).done(function(){
+                        loading();
+                        app.log('Created sheet -> ' + e);
+                    });
                 });
             }
         }

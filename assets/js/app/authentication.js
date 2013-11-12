@@ -2,7 +2,7 @@
 // Authentication Module
 //###############################################
 auth = function(){
-    var clientID = '324420386814-7ti7k7b1kd23jf7a53jq6tpnu5n2k9ml.apps.googleusercontent.com';
+    var clientID = '324420386814-09gqv0bpav4svkilv7i8kk9tmm5sakla.apps.googleusercontent.com';
     var scopes = ['https://www.googleapis.com/auth/drive.file', 'https://spreadsheets.google.com/feeds/'];
     var callbacks = {
         pass: null,
