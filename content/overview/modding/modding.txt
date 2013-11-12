@@ -2,4 +2,6 @@ Title: Modding
 ----
 Sidebar: overview
 ----
-Link: /mod.html
+Order: 1
+----
+Link: /docs/mod.html

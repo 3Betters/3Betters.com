@@ -152,7 +152,7 @@ db = function(){
             //      :: Fill in defaults if they aren't
             //===============================================
             check: function(){
-                var required = ['Mods'];
+                var required = ['Mods', 'Bankroll Manager'];
                 var existing = _.pluck(sheetMeta.sheet, 'title');
                 var missing = _.difference(required, existing);
 
@@ -161,9 +161,11 @@ db = function(){
                 //- - - - - - - - - - - - - - - - - - - - - - - -
                 _.each(missing, function(e, i){
                     loading('Creating required sheets');
+                    var action = e.toLowerCase();
+
                     $.post('/server/post.php', {
                             url:    db.url(),
-                            action:   'new-workbook',
+                            action:   'new-sheet',
                             data: {
                                 title: e
                             }
@@ -171,9 +173,9 @@ db = function(){
                     ).error(function(result){
                         loading();
                         app.log(result);
-                    }).done(function(){
+                    }).done(function(result){
                         loading();
-                        app.log('Created sheet -> ' + e);
+                        app.log('Created sheet -> ' + e, result);
                     });
                 });
             }
