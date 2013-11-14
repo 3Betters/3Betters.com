@@ -15,16 +15,19 @@ notice = {
         // Setup defaults
         //- - - - - - - - - - - - - - - - - - - - - - - -
         type = type || 'error';
-        var $notices = $('ul.notices.' + type);
+        var $notices = $m('ul.notices.' + type);
         if(msg.indexOf('<a ') === -1) msg = '<a>'+msg+'</a>';
-        callback = callback || 'removeNotice($(this))';
+        callback = callback || function(){removeNotice($(this));};
         icon = icon || 'delete';
 
         //- - - - - - - - - - - - - - - - - - - - - - - -
         // Creae the row
         //- - - - - - - - - - - - - - - - - - - - - - - -
         if($('li[data-notice="' + code + '"]', $notices).length) return;
-        $notices.append('<li onClick="'+callback+'" data-notice="'+code+'" data-theme="c" data-icon="'+icon+'">'+msg+'</li>').listview('refresh');
+        $notices.append('<li data-notice="'+code+'" data-theme="c" data-icon="'+icon+'">'+msg+'</li>').listview('refresh');
+        $notices.children('li').last().unbind('click').click(function(){
+            callback();
+        });
         $notices.show();
     },
 
@@ -34,7 +37,7 @@ notice = {
     //===============================================
     remove: function(code){
         if(_.isString(code)) code = [code];
-        var $notices = $('ul.notices');
+        var $notices = $m('ul.notices');
 
         _.each(code, function(errCode){
             $('li[data-notice="' + errCode + '"]', $notices).remove();

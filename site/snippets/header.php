@@ -23,6 +23,7 @@ header('Access-Control-Max-Age: 1000'); ?>
     <?= js('assets/js/app.js') ?>
     <?= js('assets/js/app/authentication.js') ?>
     <?= js('assets/js/app/database.js') ?>
+    <?= js('assets/js/app/page.js') ?>
 
     <?= js('assets/js/modules/notice.js') ?>
 

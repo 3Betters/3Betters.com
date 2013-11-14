@@ -1,0 +1,9 @@
+Title: Bankroll Manager
+----
+Sidebar: tools/bankroll-manager
+----
+Order: 1
+----
+Icon: bankroll
+----
+RequiresLogin: true

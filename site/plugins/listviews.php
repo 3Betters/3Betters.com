@@ -31,6 +31,8 @@ function listview_pages($pageSlug, $inset = true, $themeHeader = 'a', $themeBody
             <li data-role="list-divider" data-theme="<?= $themeHeader ?>"><?= $headerIcon . ucwords(str_replace('-', ' ', $path[count($path)-1])) ?></li>
             <?php 
                 foreach($children as $child): 
+                    if($child->hidden()) return;
+                
                     //- - - - - - - - - - - - - - - - - - - - - - - -
                     // Links
                     //- - - - - - - - - - - - - - - - - - - - - - - -

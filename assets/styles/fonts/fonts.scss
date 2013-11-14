@@ -23,18 +23,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-enter:before {
-    content: "\e602";
+.icon-mod:before {
+    content: "\e601";
 }
-.icon-exit:before {
-    content: "\e603";
-}
-.icon-moneybag:before {
-    content: "\e604";
-}
-.icon-home:before {
+.icon-bankroll:before {
     content: "\e600";
 }
-.icon-hammer:before {
-    content: "\e601";
+.icon-home:before {
+    content: "\e602";
 }

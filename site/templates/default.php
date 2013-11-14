@@ -24,7 +24,5 @@
     <?php //#########################################
     // Store page metadata
     //############################################### ?>
-    <div meta-requires-settings="<?= $page->requiressettings() ?>"></div>
-    <div meta-requires-tool-br="<?= $page->requirestoolbr() ?>"></div>
-    <div meta-pageshow="<?= $page->pageshow() ?>"></div>
+    <div meta-requires-login="<?= $page->requireslogin() ?>"></div>
 <?php snippet('footer') ?>

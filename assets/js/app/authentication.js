@@ -10,21 +10,30 @@ auth = function(){
     };
     var isIn = false;   //Is the user logged in?
     var authToken = null;   //The access token
+    var checked = false; //Determines if we have checked to see if the user is loggedin
 
     //===============================================
     // Gets the server response for authorization
     //===============================================
     function response(result){
         if(result && !result.error){
-            loggedIn();
             if(callbacks.pass) callbacks.pass(result);
             app.log('Logged in', result);
+
+            isIn = true;
+            authToken = gapi.auth.getToken().access_token;
+            db.load();
         }
         else {
-            loggedOut();
-            if(callbacks.pass) callbacks.pass(result);
+            if(callbacks.fail) callbacks.fail(result);
             app.log('Could not log in.', result);
+
+            isIn = false;
+            authToken = null;
         }
+        checked = true;
+        auth.visualize();
+        page.check.requirements();
     }
 
     //===============================================
@@ -36,13 +45,7 @@ auth = function(){
         $('.ui-btn-text', $login).text($login.data('text-logout'));
         $login.attr('onclick', 'window.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + window.location.href;');
 
-        isIn = true;
-
-        //- - - - - - - - - - - - - - - - - - - - - - - -
-        // Load Database
-        //- - - - - - - - - - - - - - - - - - - - - - - -
-        authToken = gapi.auth.getToken().access_token;
-        db.load();
+        notice.remove('requires-login');
     }
 
     //===============================================
@@ -53,9 +56,6 @@ auth = function(){
         switchTheme($login, 'c');
         $('.ui-btn-text', $login).text($login.data('text-login'));
         $login.attr('onclick', 'auth.login(true)');
-
-        isIn = false;
-        authToken = null;
     }
 
     //###############################################
@@ -73,8 +73,6 @@ auth = function(){
             // Already logged in
             //- - - - - - - - - - - - - - - - - - - - - - - -
             if(isIn){
-                pass = true;
-                if(pass) pass();
                 loggedIn();
             //- - - - - - - - - - - - - - - - - - - - - - - -
             // Attempt Login
@@ -89,9 +87,19 @@ auth = function(){
         },
 
         //===============================================
+        // Updates page to match logged in state
+        // :: Called on pageShow()
+        //===============================================
+        visualize: function(){
+            if(auth.in()) loggedIn();
+            else loggedOut();
+        },
+
+        //===============================================
         // Checks if the user is in
         //===============================================
         in: function(pass, fail){
+            checked = true;
             if(isIn && pass) pass();
             if(!isIn && fail) fail();
             return isIn;
@@ -102,6 +110,14 @@ auth = function(){
         //===============================================
         token: function(){
             return authToken;
+        },
+
+        //===============================================
+        // Determines if we've checked to log the user in
+        // :: This helps us determine if we are logged out vs just haven't checked yet
+        //===============================================
+        checked: function(){
+            return checked;
         }
     };
 }();

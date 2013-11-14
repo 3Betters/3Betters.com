@@ -60,18 +60,16 @@ app = function(){
 // The API interface
 //###############################################
 api = {};
-
+$m = function($e){
+    return $($e, $.mobile.activePage);
+};
 
 //###############################################
 // PageShow events
 //###############################################
 $(document).bind('pagebeforeshow', function(){
-    //- - - - - - - - - - - - - - - - - - - - - - - -
-    // Load Modules
-    //- - - - - - - - - - - - - - - - - - - - - - - -
-    $('script[data-module]').each(function(){
-        var $this = $(this);
-    });
+    page.check.requirements();
+    auth.visualize();
 });
 
 //###############################################
