@@ -6,13 +6,4 @@ Order: 1
 ----
 Icon: bankroll
 ----
-RequiresLogin: true
-----
-JS: tools/bankroll-manager.js
-----
-Init: bankroll.init()
-----
-Text:
-<article class="hidden bankroll-manager">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacus sit amet purus ultrices pharetra. Sed aliquam luctus libero eu imperdiet. In scelerisque ornare eros, at gravida leo fringilla eget. Donec interdum mi ac lorem gravida quis aliquam risus rhoncus. Ut sem eros, vehicula eget commodo sed, bibendum vitae eros. Proin ac lacus nunc. Fusce dolor lacus, laoreet eget ultrices sit amet, bibendum blandit tortor. Morbi laoreet, purus sed interdum placerat, elit massa iaculis risus, ut molestie tellus orci id sem. Nunc porttitor ante a erat pulvinar commodo.
-</article>
+Redirect: tools/bankroll-manager/overview

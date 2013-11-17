@@ -4838,6 +4838,20 @@ div.ui-slider-switch.ui-mini {
     width: 100%; }
   .ui-grid-a.page > article {
     width: 100%; } }
+.ui-responsive .ui-block-a {
+  padding-right: 5px; }
+.ui-responsive .ui-block-b {
+  padding: 0 5px; }
+.ui-responsive .ui-block-c {
+  padding-left: 5px; }
+
+@media all and (max-width: 560px) {
+  .ui-responsive .ui-block-a {
+    padding-right: 0px; }
+  .ui-responsive .ui-block-b {
+    padding: 0 0px; }
+  .ui-responsive .ui-block-c {
+    padding-left: 0px; } }
 .align-center {
   text-align: center; }
 
@@ -4866,14 +4880,20 @@ div.ui-slider-switch.ui-mini {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.icon-mod:before {
+.icon-overview:before {
   content: "\e601"; }
+
+.icon-clock:before {
+  content: "\e602"; }
 
 .icon-bankroll:before {
   content: "\e600"; }
 
+.icon-mod:before {
+  content: "\e603"; }
+
 .icon-home:before {
-  content: "\e602"; }
+  content: "\e604"; }
 
 ul.notices {
   margin: 20px 0;

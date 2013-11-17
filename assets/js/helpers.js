@@ -21,11 +21,12 @@ function switchTheme(list, theme, prefix){
 
     _.each(list, function($obj){
         $obj.removeClass(
-            'ui-btn-up-a ui-btn-hover-a ui-body-a ' +
-            'ui-btn-up-b ui-btn-hover-b ui-body-b ' +
-            'ui-btn-up-c ui-btn-hover-c ui-body-c ' +
-            'ui-btn-up-d ui-btn-hover-d ui-body-d ' +
-            'ui-btn-up-e ui-btn-hover-e ui-body-e'
+            'ui-btn-up-a ui-btn-down-a ui-btn-hover-a ui-body-a ' +
+            'ui-btn-up-b ui-btn-down-b ui-btn-hover-b ui-body-b ' +
+            'ui-btn-up-c ui-btn-down-c ui-btn-hover-c ui-body-c ' +
+            'ui-btn-up-d ui-btn-down-d ui-btn-hover-d ui-body-d ' +
+            'ui-btn-up-e ui-btn-down-e ui-btn-hover-e ui-body-e ' +
+            'ui-btn-up-f ui-btn-down-f ui-btn-hover-f ui-body-f'
         ).addClass(prefix + theme)
             .attr('data-theme', theme);
     });

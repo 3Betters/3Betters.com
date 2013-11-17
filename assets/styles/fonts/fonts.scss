@@ -23,12 +23,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mod:before {
+.icon-overview:before {
     content: "\e601";
+}
+.icon-clock:before {
+    content: "\e602";
 }
 .icon-bankroll:before {
     content: "\e600";
 }
+.icon-mod:before {
+    content: "\e603";
+}
 .icon-home:before {
-    content: "\e602";
+    content: "\e604";
 }

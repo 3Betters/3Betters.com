@@ -52,3 +52,20 @@ $width-desktop: 62.5em;
         & > article{width: 100%;}
     }
 }
+
+
+//###############################################
+// .ui-responsive
+//###############################################
+.ui-responsive{
+    .ui-block-a{padding-right: 5px;}
+    .ui-block-b{padding: 0 5px;}
+    .ui-block-c{padding-left: 5px;}
+}
+@media all and (max-width: 560px){
+.ui-responsive{
+    .ui-block-a{padding-right: 0px;}
+    .ui-block-b{padding: 0 0px;}
+    .ui-block-c{padding-left: 0px;}
+}    
+}

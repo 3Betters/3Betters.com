@@ -150,7 +150,7 @@ db = function(){
             //      :: Fill in defaults if they aren't
             //===============================================
             check: function(){
-                var required = ['Mods', 'Bankroll Manager'];
+                var required = ['Settings', 'Mods', 'Bankroll Manager'];
                 var existing = _.pluck(sheetMeta.sheet, 'title');
                 var missing = _.difference(required, existing);
                 var loaded = [];

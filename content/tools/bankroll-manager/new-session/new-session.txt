@@ -1,0 +1,47 @@
+Title: New Session
+----
+Sidebar: tools/bankroll-manager
+----
+Order: 5
+----
+Icon: clock
+----
+RequiresLogin: true
+----
+JS: tools/bankroll-manager.js
+----
+Init: bankroll.init()
+----
+Text:
+<article class="hidden bankroll-manager">
+    <form action="">
+        <h2>Quickstart New Session</h2>
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <label for="session-title">Title:</label>
+            <input type="text" name="title" id="session-title" value="" placeholder="Optional Title">
+        </div>
+        
+        <br>
+        <div class="ui-grid-b ui-responsive">
+            <div class="ui-block-a">
+                <label for="session-profit">Profit:</label>
+                <input type="number" name="profit" id="session-profit" value="">
+            </div>
+            <div class="ui-block-b">
+                <label for="session-limit">Limit:</label>
+                <input type="text" name="limit" id="session-limit" value="">
+            </div>
+            <div class="ui-block-c">
+                <label for="session-mental">Mental:</label>
+                <input type="range" name="mental" id="session-mental" value="2" min="1" max="3" data-highlight="true">
+            </div>
+        </div>
+
+        <br>
+        <label for="notes">Notes:</label>
+        <textarea name="notes" id="session-notes"></textarea>
+
+        <br>
+        <a href="#" onClick="bankroll.overview.quickstart($(this))" data-role="button">Start</a>
+    </form>    
+</article>
