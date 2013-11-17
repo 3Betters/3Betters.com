@@ -33,7 +33,6 @@ auth = function(){
         }
         checked = true;
         auth.visualize();
-        page.check.requirements();
     }
 
     //===============================================

@@ -28,6 +28,7 @@ db = function(){
     var meta = {};      //Contains the database meta data, which is what gets returned from db.load
     var sheetMeta = {}; //Contains global sheets metadata
     var feedURL = '';
+    var checked = false;
 
     return {
         //===============================================
@@ -50,6 +51,11 @@ db = function(){
                 }
             });
         },
+
+        //===============================================
+        // Determines if we have checked the database yet
+        //===============================================
+        checked: function(){return checked;},
 
         //===============================================
         // Gets the databases URL
@@ -96,14 +102,6 @@ db = function(){
         // Individual sheets
         //###############################################
         sheets: {
-            //===============================================
-            // Create a new worksheet if it doesn't exist
-            //===============================================
-            create: function(title){
-                if(!_.isString(title))
-                    return app.log('You must pass a [STR] title into sheets.create()');
-            },
-
             //===============================================
             // Loads all the sheet meta from the current database
             // :: This will overwrite any existing data
@@ -155,6 +153,7 @@ db = function(){
                 var required = ['Mods', 'Bankroll Manager'];
                 var existing = _.pluck(sheetMeta.sheet, 'title');
                 var missing = _.difference(required, existing);
+                var loaded = [];
 
                 //- - - - - - - - - - - - - - - - - - - - - - - -
                 // Create the sheet
@@ -176,8 +175,30 @@ db = function(){
                     }).done(function(result){
                         loading();
                         app.log('Created sheet -> ' + e, result);
+
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        // Initialize the page once everything is loaded
+                        //- - - - - - - - - - - - - - - - - - - - - - - -
+                        loaded.push(e);
+                        var allLoaded = true;
+                        _.each(missing, function(e){
+                            if(_.indexOf(loaded, e) === -1)
+                                allLoaded = false;
+                        });
+                        if(allLoaded){
+                            checked = true;
+                            page.init();
+                        }
                     });
                 });
+
+                //- - - - - - - - - - - - - - - - - - - - - - - -
+                // All have been loaded, init
+                //- - - - - - - - - - - - - - - - - - - - - - - -
+                if(missing.length === 0) {
+                    checked = true;
+                    page.init();
+                }
             }
         }
     };

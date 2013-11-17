@@ -22,10 +22,11 @@ This document contains a list of methods for different objects used by 3Betters.
     db.load(callback);
     db.create(callback);
     db.url();   //Gets the databases full url, complete with authentication token
-    
-    sheets.create(*title);
+    db.checked();
+
     sheets.load(callback);
     sheets.check();
 
 ## Pages        `page`
     page.check.requirements();
+    page.init();

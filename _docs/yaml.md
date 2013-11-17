@@ -29,3 +29,9 @@ List of JavaScript related variables.
 
 ### RequiresLogin
 `(Any)` Determines whether the page requires the user to be logged in. If they aren't, then a message is shown and any content within a `.requires-login` class is hidden.
+
+### JS
+`(STR)` The URL of the javascript file to load when visiting the page, relative to `/assets/js/`.
+
+### Init
+`(STR)` The initialization script to execute on each .pageShow. This is executed with `eval()`, so go nuts. Make sure to escape double quotes ("), as it's inserted into an attribute wrapped with doubles.

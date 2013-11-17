@@ -72,7 +72,7 @@ $m = function($e){
 // PageShow events
 //###############################################
 $(document).bind('pagebeforeshow', function(){
-    page.check.requirements();
+    page.init();
     auth.visualize();
 });
 
