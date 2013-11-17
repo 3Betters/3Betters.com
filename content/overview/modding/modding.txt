@@ -6,4 +6,4 @@ Order: 1
 ----
 Icon: mod
 ----
-Link: /docs/mod.html
+Link: /readme.html

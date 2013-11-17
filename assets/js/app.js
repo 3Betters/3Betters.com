@@ -19,7 +19,9 @@ app = function(){
     // List of loaded mods
     //- - - - - - - - - - - - - - - - - - - - - - - -
     var mods = {};
-    var debug = false;
+    var debug = !!$.url().param('debug');
+    var url = $.url();
+
     $(function(){
         debug = $('body').hasClass('debug');
     });
@@ -27,10 +29,11 @@ app = function(){
     return {
         //===============================================
         // Loads a module
+        //===============================================
         // id:      [STR] The modules ID. Only get's loaded if it's unique
         // src:     [STR] URL of the file
         // callback:[FUNC] Callback function to execute after load
-        //===============================================
+        // 
         load: function(id, src){
             if(!_.has(mods, id)){
                 //$.ajax
@@ -47,9 +50,10 @@ app = function(){
 
         //===============================================
         // Console logging
+        //===============================================
         // msg:     [STR] The message to log
         // data:    [***] Any additional data to display
-        //===============================================
+        // 
         log: function(msg, data){
             if(app.debug()) console.log('3Betters: ' + msg, data);
         }

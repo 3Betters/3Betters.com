@@ -1,6 +1,3 @@
-<?php header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Max-Age: 1000'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +14,7 @@ header('Access-Control-Max-Age: 1000'); ?>
     <?= js('assets/js/lib/jquery.js') ?>
     <?= js('assets/js/lib/jquery.mobile.js') ?>
     <?= js('assets/js/lib/underscore.js') ?>
+    <?= js('assets/js/lib/purl.js') ?>
 
     <!-- App -->
     <?= js('assets/js/helpers.js') ?>
@@ -35,6 +33,3 @@ header('Access-Control-Max-Age: 1000'); ?>
             <a href="/"><i class="icon-home"></i></a>
             <h1><?= $page->title() ?></h1>
         </header>
-
-        <!-- CORE MODULES -->
-        <script data-id="bankroll" data-module="<?= url('assets/js/mods/bankroll.js') ?>"></script>

@@ -27,12 +27,12 @@ snippet('header') ?>
                 <small>disable popups for this page if the login does not work</small>
             </p>
             <br>
-            <p><?= listview_pages('overview') ?></p>
+            <p><?= Listview\children('overview') ?></p>
         </article>
  
         <!-- Right Column -->
         <aside class="ui-block-b">
-            <p><?= listview_pages('tools') ?></p>
+            <p><?= Listview\children('tools') ?></p>
         </aside>
     </div>    
 <?php snippet('footer') ?>
