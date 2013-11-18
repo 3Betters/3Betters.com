@@ -24,7 +24,7 @@
         // Store page metadata
         //############################################### ?>
         <div meta-requires-login="<?= $page->requireslogin() ?>"></div>
-        <div meta-script="<?= $page->js() ? '/assets/js/' . $page->js() : '' ?>"></div>
+        <div meta-script="<?= $page->js(); ?>"></div>
         <div meta-init="<?= $page->init() ?>"></div>
     </div>    
 <?php snippet('footer') ?>

@@ -75,3 +75,20 @@ function run(func, args){
         ))(args);
     }
 }
+
+//===============================================
+// Date formatter
+//===============================================
+milliToTime = function(ms){
+    x = ms / 1000;
+    var seconds = Math.round(x % 60);
+    x /= 60;
+    var minutes = Math.round(x % 60);
+    x /= 60;
+    var hours = Math.round(x % 24);
+
+    if(seconds < 10) seconds = '0' + seconds;
+    if(minutes < 10) minutes = '0' + minutes;
+
+    return {"hours" : hours, "minutes" : minutes, "seconds" : seconds};
+};

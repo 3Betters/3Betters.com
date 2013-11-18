@@ -30,3 +30,7 @@ This document contains a list of methods for different objects used by 3Betters.
 ## Pages        `page`
     page.check.requirements();
     page.init();
+
+## Bankroll Manager `bankroll`
+    bankroll.init();
+    bankroll.overview.quickstart();

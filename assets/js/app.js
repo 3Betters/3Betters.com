@@ -28,19 +28,6 @@ app = function(){
 
     return {
         //===============================================
-        // Loads a module
-        //===============================================
-        // id:      [STR] The modules ID. Only get's loaded if it's unique
-        // src:     [STR] URL of the file
-        // callback:[FUNC] Callback function to execute after load
-        // 
-        load: function(id, src){
-            if(!_.has(mods, id)){
-                //$.ajax
-            }
-        },
-
-        //===============================================
         // Toggle debugging
         //===============================================
         debug: function(setDebug){

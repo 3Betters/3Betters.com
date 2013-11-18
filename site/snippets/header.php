@@ -14,8 +14,8 @@
     <?= js('assets/js/lib/jquery.js') ?>
     <?= js('assets/js/lib/jquery.mobile.js') ?>
     <?= js('assets/js/lib/underscore.js') ?>
+    <?= js('assets/js/lib/underscore.string.js') ?>
     <?= js('assets/js/lib/purl.js') ?>
-    <?= js('assets/js/lib/d3.js') ?>
 
     <!-- App -->
     <?= js('assets/js/helpers.js') ?>

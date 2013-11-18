@@ -3,6 +3,8 @@
 //###############################################
 page = function(){
     var loaded = [];    //Contains a list of loaded pages
+    var loading = 0;    //Number of scripts being loaded (to prevent init from loading multiple times)
+    var scriptsDir = '/assets/js/';
 
     return {
         //===============================================
@@ -36,14 +38,29 @@ page = function(){
             var init = $m('[meta-init]').attr('meta-init');
 
             //- - - - - - - - - - - - - - - - - - - - - - - -
-            // Load in scripts
+            // Loop through each script
             //- - - - - - - - - - - - - - - - - - - - - - - -
-            if(script && _.indexOf(loaded, script) === -1){
-                loaded.push(script);
-                $.getScript(script, function(){
-                    if(init) eval(init);
+            // Once we've loaded the final script, execute the initializer
+            // 
+            if(script){
+                var scripts = script.split(',');
+                loading = scripts.length;
+                _.each(scripts, function(script){
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Load in scripts
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    if(_.indexOf(loaded, script) === -1){
+                        script = _.str.trim(script);
+                        loaded.push(script);
+
+                        $.getScript(scriptsDir + script, function(){
+                            if(init && --loading === 0) eval(init);
+                        });
+                    } else if(init) eval(init);
                 });
-            } else if(init) eval(init);
+            } else {
+                if(init) eval(init);
+            }
         }
     };
 }();
