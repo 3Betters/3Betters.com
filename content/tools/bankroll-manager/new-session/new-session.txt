@@ -10,14 +10,14 @@ RequiresLogin: true
 ----
 JS: tools/bankroll-manager.js, lib/moment.js
 ----
-Init: bankroll.init()
+Init: bankroll.overview.init()
 ----
 Text:
 <article class="hidden bankroll-manager">
     <form action="">
         <!-- Quickstart -->
         <h2>New Session</h2>
-        <a href="#" onClick="bankroll.overview.quickstart($(this))" data-role="button">Start</a>
+        <a href="#" class="timer-toggle" onClick="bankroll.overview.quickstart($(this))" data-role="button">Start</a>
 
         <!-- Title & Session Time -->
         <br>
@@ -49,12 +49,12 @@ Text:
                 <input type="number" name="profit" id="session-profit" value="">
             </div>
             <div class="ui-block-b">
-                <label for="session-limit">Limit:</label>
-                <input type="text" name="limit" id="session-limit" value="">
-            </div>
-            <div class="ui-block-c">
                 <label for="session-mental">Mental:</label>
                 <input type="range" name="mental" id="session-mental" value="2" min="1" max="3" data-highlight="true">
+            </div>
+            <div class="ui-block-c">
+                <label for="session-limit">Limit:</label>
+                <input type="text" name="limit" id="session-limit" value="">
             </div>
         </div>
 

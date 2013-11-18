@@ -10,6 +10,4 @@ RequiresLogin: true
 ----
 JS: tools/bankroll-manager.js
 ----
-Init: bankroll.init()
-----
 Text:

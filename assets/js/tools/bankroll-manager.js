@@ -2,6 +2,12 @@
 // Bankroll Manger
 //###############################################
 bankroll = function(){
+    var $start  = $m('[name=start]');
+    var $end    = $m('[name=end]');
+    var $total  = $m('[name=total]');
+    var initialTime = 0;
+    var totalTime = 0;
+
     //===============================================
     // Change the mental slider color
     //===============================================
@@ -22,23 +28,52 @@ bankroll = function(){
         switchTheme($this.next().find('a'), theme === 'c' ? 'a' : theme);
     }
 
-    return {
-        //===============================================
-        // Initialize the page
-        //===============================================
-        init: function(){
-            $m('.bankroll-manager').show();
-            $m('[name=mental]')
-                .unbind('change')
-                .change(updateMental)
-                .blur(updateMental);
-            updateMental(true);
-        },
+    //===============================================
+    // Update the total timer
+    //===============================================
+    // paused:  [BOOL] If true, the total time will be stored to be added when unpaused
+    function updateTotalTime(storeTotal){
+        var diff = moment().diff(initialTime) + totalTime;
+        var time = milliToTime(diff);
+        $total.val(time.hours + ':' + time.minutes + ':' + time.seconds);
 
+        if(storeTotal) totalTime = diff;
+    }
+
+
+
+
+    //###############################################
+    // Public Methods
+    //###############################################
+    return {
         //###############################################
         // Overview Page
         //###############################################
         overview: {
+            //===============================================
+            // Initialize the page
+            //===============================================
+            init: function(){
+                $m('.bankroll-manager').show();
+                $m('[name=mental]')
+                    .unbind('change')
+                    .change(updateMental)
+                    .blur(updateMental);
+                updateMental(true);
+
+                $start  = $m('[name=start]');
+                $end    = $m('[name=end]');
+                $total  = $m('[name=total]');
+
+                if($('.timer-toggle').hasClass('unpaused')){
+                    updateTotalTime();
+                    timers.clearPageShow.bankroll.paused = setInterval(function(){
+                        updateTotalTime();
+                    }, 1000);
+                }
+            },
+
             //===============================================
             // Quickstart Session
             //===============================================
@@ -48,22 +83,38 @@ bankroll = function(){
                 //===============================================
                 // Toggle the timer
                 //===============================================
-                //:: Starting will autofill the start time
-                //:: Stopping will autofill the end time
-                //:: Continueing will create a new session with the same fields
-                //:: Clicking "New Session" will clear out all the fields
+                // Starting will autofill the start time
+                // Stopping will autofill the end time
+                // Continueing will create a new session with the same fields
+                // Clicking "New Session" will clear out all the fields
                 //
-                $this.toggleClass('started');
-                var now = moment();
+                $this.toggleClass('unpaused');
 
                 //===============================================
                 // Start new session
                 //===============================================
-                if($this.hasClass('started')){
+                // 
+                if($this.hasClass('unpaused')){
                     switchTheme($this, 'b');
                     $this.find('.ui-btn-text').text('Stop');
+                    initialTime = new Date().getTime();
 
-                    $m('[name=start]').val(now.format('YYYY-MM-DD, HH:mm:ss'));
+                    //===============================================
+                    // Tick the timer
+                    //===============================================
+                    clearInterval(timers.clearPageShow.bankroll.paused);
+                    timers.clearPageShow.bankroll.paused = setInterval(function(){
+                        updateTotalTime();
+                    }, 1000);
+
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    // Either continue or start a new session
+                    //- - - - - - - - - - - - - - - - - - - - - - - -
+                    if(!$this.hasClass('started')){
+                        $this.addClass('started');
+                        $start.val(moment().format('YYYY-MM-DD, HH:mm:ss'));
+                        $total.val('0:00:00');
+                    }
                 //===============================================
                 // Stop current Session
                 //===============================================
@@ -72,20 +123,13 @@ bankroll = function(){
                 } else {
                     switchTheme($this, 'c');
                     $this.find('.ui-btn-text').text('Continue');
-                    var diff = now.diff(
-                        moment(
-                            $m('[name=start]').val(),
-                            'YYYY-MM-DD, HH:mm:ss'
-                        )
-                    );
-                    var time = milliToTime(diff);
-                    console.log(time);
+                    clearInterval(timers.clearPageShow.bankroll.paused);
+                    updateTotalTime(true);
 
                     //- - - - - - - - - - - - - - - - - - - - - - - -
                     // Calculate the time
                     //- - - - - - - - - - - - - - - - - - - - - - - -
-                    $m('[name=end]').val(now.format('YYYY-MM-DD, HH:mm:ss'));
-                    $m('[name=total]').val(time.hours + ':' + time.minutes + ':' + time.seconds);
+                    $end.val(moment().format('YYYY-MM-DD, HH:mm:ss'));
                 }
             }
         }

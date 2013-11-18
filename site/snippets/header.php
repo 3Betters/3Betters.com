@@ -25,6 +25,7 @@
     <?= js('assets/js/app/page.js') ?>
     <!-- Modules -->
     <?= js('assets/js/modules/notice.js') ?>
+    <?= js('assets/js/modules/timers.js') ?>
 
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </head>

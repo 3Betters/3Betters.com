@@ -80,12 +80,9 @@ function run(func, args){
 // Date formatter
 //===============================================
 milliToTime = function(ms){
-    x = ms / 1000;
-    var seconds = Math.round(x % 60);
-    x /= 60;
-    var minutes = Math.round(x % 60);
-    x /= 60;
-    var hours = Math.round(x % 24);
+    var hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
+    var minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
+    var seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
 
     if(seconds < 10) seconds = '0' + seconds;
     if(minutes < 10) minutes = '0' + minutes;

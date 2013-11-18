@@ -59,6 +59,7 @@ $m = function($e){
 // PageShow events
 //###############################################
 $(document).bind('pagebeforeshow', function(){
+    timers.clearPageShow.clear();
     page.init();
     auth.visualize();
 });
